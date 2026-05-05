@@ -1,0 +1,178 @@
+{
+  "heel_r": {
+    "mobilized_body_name": "calcn_r",
+    "sphere_position_in_mobilized_body": [
+      0.015,
+      0.005,
+      0.015
+    ],
+    "sphere_radius": 0.03,
+    "half_space_transform": [
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "stiffness": 1000000.0,
+    "dissipation": 1.0,
+    "static_friction": 0.9,
+    "dynamic_friction": 0.6,
+    "viscous_friction": 0.6,
+    "transition_velocity": 0.2,
+    "constant_contact_force": 1e-05,
+    "hertz_smoothing": 300.0,
+    "hunt_crossley_smoothing": 50.0
+  },
+  "toe_r": {
+    "mobilized_body_name": "calcn_r",
+    "sphere_position_in_mobilized_body": [
+      0.185,
+      0,
+      0.015
+    ],
+    "sphere_radius": 0.03,
+    "half_space_transform": [
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "stiffness": 1000000.0,
+    "dissipation": 1.0,
+    "static_friction": 0.9,
+    "dynamic_friction": 0.6,
+    "viscous_friction": 0.6,
+    "transition_velocity": 0.2,
+    "constant_contact_force": 1e-05,
+    "hertz_smoothing": 300.0,
+    "hunt_crossley_smoothing": 50.0
+  },
+  "heel_l": {
+    "mobilized_body_name": "calcn_l",
+    "sphere_position_in_mobilized_body": [
+      0.015,
+      -0.005,
+      0.015
+    ],
+    "sphere_radius": 0.03,
+    "half_space_transform": [
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "stiffness": 1000000.0,
+    "dissipation": 1.0,
+    "static_friction": 0.9,
+    "dynamic_friction": 0.6,
+    "viscous_friction": 0.6,
+    "transition_velocity": 0.2,
+    "constant_contact_force": 1e-05,
+    "hertz_smoothing": 300.0,
+    "hunt_crossley_smoothing": 50.0
+  },
+  "toe_l": {
+    "mobilized_body_name": "calcn_l",
+    "sphere_position_in_mobilized_body": [
+      0.185,
+      0,
+      0.015
+    ],
+    "sphere_radius": 0.03,
+    "half_space_transform": [
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        -1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "stiffness": 1000000.0,
+    "dissipation": 1.0,
+    "static_friction": 0.9,
+    "dynamic_friction": 0.6,
+    "viscous_friction": 0.6,
+    "transition_velocity": 0.2,
+    "constant_contact_force": 1e-05,
+    "hertz_smoothing": 300.0,
+    "hunt_crossley_smoothing": 50.0
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "half_gait_cycle_duration": {
+    "lower": 0.2,
+    "upper": 0.7
+  },
+  "hamstrings_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "bifemsh_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "glut_max_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "iliopsoas_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "rect_fem_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "vasti_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "gastroc_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "soleus_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "tib_ant_r_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "hamstrings_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "bifemsh_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "glut_max_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "iliopsoas_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "rect_fem_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "vasti_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "gastroc_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "soleus_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "tib_ant_l_activation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "pelvis_tilt_position": {
+    "lower": -0.7853981633974483,
+    "upper": 0.7853981633974483
+  },
+  "pelvis_tx_position": {
+    "lower": 0.0,
+    "upper": 3.0
+  },
+  "pelvis_ty_position": {
+    "lower": 0.5,
+    "upper": 1.5
+  },
+  "hip_flexion_r_position": {
+    "lower": -0.2617993877991494,
+    "upper": 2.1816615649929116
+  },
+  "knee_angle_r_position": {
+    "lower": -2.0943950999999998,
+    "upper": 0.0
+  },
+  "ankle_angle_r_position": {
+    "lower": -0.7853981633974483,
+    "upper": 0.3490658503988659
+  },
+  "hip_flexion_l_position": {
+    "lower": -0.2617993877991494,
+    "upper": 2.1816615649929116
+  },
+  "knee_angle_l_position": {
+    "lower": -2.0943950999999998,
+    "upper": 0.0
+  },
+  "ankle_angle_l_position": {
+    "lower": -0.7853981633974483,
+    "upper": 0.3490658503988659
+  },
+  "pelvis_tilt_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "pelvis_tx_velocity": {
+    "lower": 0.0,
+    "upper": 15.0
+  },
+  "pelvis_ty_velocity": {
+    "lower": -5.0,
+    "upper": 5.0
+  },
+  "hip_flexion_r_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "knee_angle_r_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "ankle_angle_r_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "hip_flexion_l_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "knee_angle_l_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "ankle_angle_l_velocity": {
+    "lower": -25.0,
+    "upper": 25.0
+  },
+  "hamstrings_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "bifemsh_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "glut_max_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "iliopsoas_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "rect_fem_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "vasti_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "gastroc_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "soleus_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "tib_ant_r_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "hamstrings_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "bifemsh_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "glut_max_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "iliopsoas_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "rect_fem_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "vasti_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "gastroc_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "soleus_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  },
+  "tib_ant_l_excitation": {
+    "lower": 0.0,
+    "upper": 1.0
+  }
+}
