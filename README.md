@@ -1,7 +1,5 @@
 # Self-Stable Walking and Running in a Human Musculoskeletal Model through orbital stability optimization
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23669920.svg)](https://doi.org/10.5281/zenodo.23669920)
-
 <p align="center">
   <img src="docs/walking.gif" alt="Generated walking" width="600">
 </p>
