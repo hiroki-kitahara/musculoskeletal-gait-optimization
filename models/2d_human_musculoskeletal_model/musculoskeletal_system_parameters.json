@@ -1,0 +1,7 @@
+{
+  "body_mass": 75.1646,
+  "gravitational_acceleration": 9.81,
+  "damping": 0.1,
+  "x_coordinate_name": "pelvis_tx",
+  "z_coordinate_name": "pelvis_ty"
+}

@@ -20,7 +20,7 @@ class MusculoskeletalSystem:
     self.FT = None
     self.T_lig = None
     self.tau = None
-    self.J_mobilized_body_list = None
+    self.T_mobilized_body_list = None
     self.W_mobilized_body_list = None
     self.E_dot = None
     self.x_dot = None
@@ -47,7 +47,7 @@ class MusculoskeletalSystem:
 
     tau_total[self.actuated_coordinate_indices] = self.tau
 
-    self.J_mobilized_body_list = []
+    self.T_mobilized_body_list = []
     self.W_mobilized_body_list = []
 
     for contact_kinematics_function, contact in zip(self.contact_kinematics_functions, self.contacts):
@@ -57,7 +57,7 @@ class MusculoskeletalSystem:
 
       tau_total += J_mobilized_body.T @ W_mobilized_body
 
-      self.J_mobilized_body_list.append(J_mobilized_body)
+      self.T_mobilized_body_list.append(T_mobilized_body)
       self.W_mobilized_body_list.append(W_mobilized_body)
 
     tau_total += d

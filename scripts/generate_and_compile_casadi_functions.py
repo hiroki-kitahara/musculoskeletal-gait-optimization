@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 from pathlib import Path
@@ -9,33 +10,23 @@ import casadi as ca
 import pinocchio as pin
 import pinocchio.casadi as cpin
 
-MJCF_MODEL_PATH = 'models/2d_human_musculoskeletal_model/mjcf_model/2d_human_musculoskeletal_model.xml'
-
-COORDINATE_NAMES_PATH = 'models/2d_human_musculoskeletal_model/coordinate_names.json'
-
-CONTACT_NAMES_PATH = 'models/2d_human_musculoskeletal_model/contact_names.json'
-CONTACT_PARAMETERS_PATH = 'models/2d_human_musculoskeletal_model/contact_parameters.json'
-
-CONTACT_KINEMATICS_FUNCTIONS_SAVE_DIRECTORY_PATH = 'models/2d_human_musculoskeletal_model'
-SKELETAL_DYNAMICS_FUNCTION_SAVE_DIRECTORY_PATH = 'models/2d_human_musculoskeletal_model'
-
-def load_model():
-  model = pin.buildModelFromMJCF(MJCF_MODEL_PATH)
+def _load_model(mjcf_model_path):
+  model = pin.buildModelFromMJCF(mjcf_model_path)
 
   cmodel = cpin.Model(model)
   cdata = cmodel.createData()
 
   return cmodel, cdata
 
-def get_coordinate_index_map():
-  tree = ET.parse(MJCF_MODEL_PATH)
+def _get_coordinate_index_map(mjcf_model_path, coordinate_names_path):
+  tree = ET.parse(mjcf_model_path)
   root = tree.getroot()
 
   worldbody = root.find('worldbody')
 
   pin_coordinate_names = [joint.get('name') for joint in worldbody.iter('joint')]
 
-  with open(COORDINATE_NAMES_PATH, 'r') as f:
+  with open(coordinate_names_path, 'r') as f:
     orig_coordinate_names = json.load(f)
 
   orig_to_pin_indices = [orig_coordinate_names.index(name) for name in pin_coordinate_names]
@@ -43,7 +34,7 @@ def get_coordinate_index_map():
 
   return orig_to_pin_indices, pin_to_orig_indices
 
-def generate_and_compile_casadi_function(f, save_directory_path, save_base_name):
+def _generate_and_compile_casadi_function(f, save_directory_path, save_base_name):
   jac_f = f.jacobian()
   jac_jac_f = jac_f.jacobian()
   jac_jac_jac_f = jac_jac_f.jacobian()
@@ -71,15 +62,15 @@ def generate_and_compile_casadi_function(f, save_directory_path, save_base_name)
 
   os.remove('tmp.c')
 
-def generate_and_compile_contact_kinematics_functions():
-  cmodel, cdata = load_model()
+def _generate_and_compile_contact_kinematics_functions(mjcf_model_path, model_dir, save_dir):
+  cmodel, cdata = _load_model(mjcf_model_path)
 
-  orig_to_pin_indices, pin_to_orig_indices = get_coordinate_index_map()
+  orig_to_pin_indices, pin_to_orig_indices = _get_coordinate_index_map(mjcf_model_path, model_dir / 'coordinate_names.json')
 
-  with open(CONTACT_NAMES_PATH, 'r') as f:
+  with open(model_dir / 'contact_names.json', 'r') as f:
     contact_names = json.load(f)
 
-  with open(CONTACT_PARAMETERS_PATH, 'r') as f:
+  with open(model_dir / 'contact_parameters.json', 'r') as f:
     contact_parameters = json.load(f)
 
   q_orig = ca.SX.sym('q', cmodel.nq)
@@ -105,12 +96,12 @@ def generate_and_compile_contact_kinematics_functions():
     base_name = f'f_{contact_name}_kinematics'
     f = ca.Function(base_name, [q_orig, v_orig], [T_mobilized_body.np, nu_mobilized_body_in_local.np, J_mobilized_body_orig], ['q', 'v'], ['T_mobilized_body', 'nu_mobilized_body_in_local', 'J_mobilized_body'])
 
-    generate_and_compile_casadi_function(f, CONTACT_KINEMATICS_FUNCTIONS_SAVE_DIRECTORY_PATH, base_name)
+    _generate_and_compile_casadi_function(f, save_dir, base_name)
 
-def generate_and_compile_skeletal_dynamics_function():
-  cmodel, cdata = load_model()
+def _generate_and_compile_skeletal_dynamics_function(mjcf_model_path, model_dir, save_dir):
+  cmodel, cdata = _load_model(mjcf_model_path)
 
-  orig_to_pin_indices, pin_to_orig_indices = get_coordinate_index_map()
+  orig_to_pin_indices, pin_to_orig_indices = _get_coordinate_index_map(mjcf_model_path, model_dir / 'coordinate_names.json')
 
   q_osim = ca.SX.sym('q', cmodel.nq)
   v_osim = ca.SX.sym('v', cmodel.nv)
@@ -127,8 +118,17 @@ def generate_and_compile_skeletal_dynamics_function():
   base_name = 'f_skeletal_dynamics'
   f = ca.Function(base_name, [q_osim, v_osim, tau_osim], [a_osim], ['q', 'v', 'tau'], ['a'])
 
-  generate_and_compile_casadi_function(f, SKELETAL_DYNAMICS_FUNCTION_SAVE_DIRECTORY_PATH, base_name)
+  _generate_and_compile_casadi_function(f, save_dir, base_name)
+
+def generate_and_compile_casadi_functions():
+  parser = argparse.ArgumentParser()
+  parser.add_argument('mjcf_model_path', type=Path)
+  parser.add_argument('model_dir', type=Path)
+  parser.add_argument('save_dir', type=Path)
+  args = parser.parse_args()
+
+  _generate_and_compile_contact_kinematics_functions(args.mjcf_model_path, args.model_dir, args.save_dir)
+  _generate_and_compile_skeletal_dynamics_function(args.mjcf_model_path, args.model_dir, args.save_dir)
 
 if __name__ == '__main__':
-  generate_and_compile_contact_kinematics_functions()
-  generate_and_compile_skeletal_dynamics_function()
+  generate_and_compile_casadi_functions()

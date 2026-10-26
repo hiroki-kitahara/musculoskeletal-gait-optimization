@@ -1,0 +1,21 @@
+{
+  "model_dir": "models/2d_human_musculoskeletal_model",
+  "optimization_config_dir": "optimization_configs/2d_human_musculoskeletal_model",
+  "stiffnesses": 500000.0,
+  "num_intervals": 30,
+  "num_collocation_points": 3,
+  "collocation_scheme": "radau",
+  "gait_speed": 1.2,
+  "cost_of_transport": null,
+  "initial_guess_path": "results/2d_human_musculoskeletal_model/walking_efficient_soft_ipopt/solution1.pkl",
+  "num_iterations": 5,
+  "seed": 1234,
+  "noise_scale": 0.01,
+  "solver_name": "ipopt",
+  "solver_options": {
+    "ipopt": {
+      "hessian_approximation": "limited-memory"
+    }
+  },
+  "save_dir": "results/2d_human_musculoskeletal_model/walking_stable_soft_ipopt"
+}

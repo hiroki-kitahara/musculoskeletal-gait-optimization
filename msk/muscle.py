@@ -2,13 +2,15 @@ import casadi as ca
 
 class DeGrooteRigidTendonMuscle:
 
-  def __init__(self, FM0, lM0, lTs, alpha0, vM_max, beta):
+  def __init__(self, FM0, lM0, lTs, alpha0, vM_max, beta, wl=0.0, wv=0.0):
     self.FM0 = FM0
     self.lM0 = lM0
     self.lTs = lTs
     self.alpha0 = alpha0
     self.vM_max = vM_max
     self.beta = beta
+    self.wl = wl
+    self.wv = wv
 
     self.b11 = 0.8150671134243542
     self.b21 = 1.055033428970575
@@ -66,11 +68,11 @@ class DeGrooteRigidTendonMuscle:
 
     self.fv = self.d1 * ca.log(self.d2 * self.vM_tilde + self.d3 + ca.sqrt((self.d2 * self.vM_tilde + self.d3)**2 + 1)) + self.d4
 
-    self.FM_iso = self.FM0 * a * self.f_act
+    self.FM_iso = self.FM0 * a * ((1 - self.wl) * self.f_act + self.wl)
 
-    self.F_CE = self.FM0 * (a * self.f_act * self.fv + self.beta * self.vM_tilde)
+    self.F_CE = self.FM0 * (a * ((1 - self.wl) * self.f_act + self.wl) * ((1 - self.wv) * self.fv + self.wv) + self.beta * self.vM_tilde)
 
-    self.FM = self.FM0 * (a * self.f_act * self.fv + self.f_pas + self.beta * self.vM_tilde)
+    self.FM = self.FM0 * (a * ((1 - self.wl) * self.f_act + self.wl) * ((1 - self.wv) * self.fv + self.wv) + self.f_pas + self.beta * self.vM_tilde)
 
     self.FT = self.FM * self.cos_alpha
 

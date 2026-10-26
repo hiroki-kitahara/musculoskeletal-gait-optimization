@@ -1,15 +1,11 @@
+import argparse
 import copy
 import itertools
 import json
+from pathlib import Path
 
 import numpy as np
 import opensim as osim
-
-OPENSIM_MODEL_PATH = 'models/2d_human_musculoskeletal_model/opensim_model/gait10dof18musc.osim'
-
-ACTUATED_COORDINATE_NAMES_PATH = 'models/2d_human_musculoskeletal_model/actuated_coordinate_names.json'
-MUSCLE_NAMES_PATH = 'models/2d_human_musculoskeletal_model/muscle_names.json'
-RANGE_OF_MOTION_PATH = 'models/2d_human_musculoskeletal_model/range_of_motion.json'
 
 NUM_SAMPLES_DETECTION = 10
 ABSOLUTE_MOMENT_ARM_THRESHOLD = 1e-4
@@ -19,19 +15,23 @@ INITIAL_DEGREE = 3
 MAXIMUM_DEGREE = 9
 ERROR_THRESHOLD = 3e-3
 
-SAVE_PATH = 'models/2d_human_musculoskeletal_model/muscle_kinematic_parameters.json'
+def regress_muscle_kinematics():
+  parser = argparse.ArgumentParser()
+  parser.add_argument('opensim_model_path')
+  parser.add_argument('model_dir', type=Path)
+  parser.add_argument('save_path', type=Path)
+  args = parser.parse_args()
 
-def main():
-  model = osim.Model(OPENSIM_MODEL_PATH)
+  model = osim.Model(args.opensim_model_path)
   state = model.initSystem()
 
   coordinate_set = model.getCoordinateSet()
   muscle_set = model.getMuscles()
 
-  with open(ACTUATED_COORDINATE_NAMES_PATH, 'r') as f:
+  with open(args.model_dir / 'actuated_coordinate_names.json', 'r') as f:
     actuated_coordinate_names = json.load(f)
 
-  with open(RANGE_OF_MOTION_PATH, 'r') as f:
+  with open(args.model_dir / 'range_of_motion.json', 'r') as f:
     range_of_motion = json.load(f)
 
   actuated_coordinates = []
@@ -46,7 +46,7 @@ def main():
     minimum_actuated_coordinate_values.append(range_of_motion[coordinate_name]['lower'])
     maximum_actuated_coordinate_values.append(range_of_motion[coordinate_name]['upper'])
 
-  with open(MUSCLE_NAMES_PATH, 'r') as f:
+  with open(args.model_dir / 'muscle_names.json', 'r') as f:
     muscle_names = json.load(f)
 
   right_muscle_names = [muscle_name for muscle_name in muscle_names if muscle_name.endswith('_r')]
@@ -188,8 +188,8 @@ def main():
 
   muscle_kinematic_parameters = right_muscle_kinematic_parameters | left_muscle_kinematic_parameters
 
-  with open(SAVE_PATH, 'w') as f:
+  with open(args.save_path, 'w') as f:
     json.dump(muscle_kinematic_parameters, f, indent=2)
 
 if __name__ == '__main__':
-  main()
+  regress_muscle_kinematics()

@@ -1,6 +1,6 @@
 import casadi as ca
 
-from src.utils import smooth_step_function
+from msk.utils import smooth_step_function
 
 class BhargavaMetabolicEnergy:
 
